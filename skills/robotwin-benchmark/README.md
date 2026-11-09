@@ -1,11 +1,33 @@
-# robotwin-benchmark 0.1.0 candidate
+# robotwin-benchmark 0.2.0 candidate
 
-This bundle uses immutable Node locks from Ubuntu 20.04 builds. It is not accepted for publication until real-model and PAOS lifecycle tests pass.
+Not accepted for publication until the real-model and PAOS lifecycle tests pass.
 
-Profiles: g05_external. Gateway: http://127.0.0.1:19132.
+Gateway: http://127.0.0.1:19132. Tools: `robotwin.benchmark.describe`, `robotwin.benchmark.run`,
+`robotwin.policy`.
 
-The g05_external profile attaches to an already running, user-configured XPolicyLab G05 websocket server. It owns only the client, never starts or stops that external server. G05 model setup is a prerequisite; an unavailable server must fail startup.
+| Profile | Paradigm | Policy | Weight | Nodes |
+| --- | --- | --- | --- | --- |
+| `vla-g05-1006` | VLA | G05 (lerobot 0.7, System1) | `g05-robotwin20-1006` | gateway 1.1.0, robotwin_benchmark 1.2.0, lerobot_infer 1.1.0 |
 
-Required host environment: ROBOTWIN_ROOT, ROBOTWIN_ENV_SITE, ROBOTWIN_PYTHON, G05_SERVER_URL, CUDA_VISIBLE_DEVICES. Host runtime must be Python 3.12 with NumPy 1.26.4; select GPU(s) explicitly and ensure enough free memory. CALVIN uses the official MCIL checkpoint and L6 language embeddings. RoboTwin requires native simulation assets and the G05 robotwin20 model in its external policy server.
+Profile names are `<paradigm>-<policy>-<weight date MMDD>`. `weights.yaml` lists each profile's
+weight; `locks/` pins the exact files (size and sha256).
 
-The host simulation/model packages are deliberately external to the thin Node binary. Environment preparation recipes and download/source hashes accompany the integration delivery. An existing interpreter alone is not proof that assets and imports are compatible.
+## User configuration
+
+Everything goes in one file, `~/.PhyAgentOS/benchmarks.yaml`. No environment variables.
+
+```yaml
+robotwin:
+  root: /path/to/RoboTwin             # required once: RoboTwin 2.0 checkout with assets
+  # weights_dir: /big/disk/weights    # optional, default ~/.PhyAgentOS/weights/robotwin-benchmark
+  # hf_endpoint: https://hf-mirror.com
+  # weights:                          # optional: reuse a local copy instead of downloading
+  #   g05-robotwin20-1006: /models/lerobot_g05_robotwin20
+```
+
+Then `paos skill start robotwin-benchmark --profile vla-g05-1006`.
+
+The start hook (`start.sh` -> `scripts/prepare.py`) links the RoboTwin root to
+`~/.PhyAgentOS/data/robotwin`, then verifies the profile weight against its lock and downloads
+missing files (HTTPS, resumable, no token). Each Node launcher builds its own uv environment from
+its lock on first start. See HOST_RUNTIME.md for the RoboTwin sources and assets.

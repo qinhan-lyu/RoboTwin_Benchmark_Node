@@ -1,0 +1,41 @@
+mode: session_endpoint
+action_trigger: observation
+# G0.5 inference (lerobot 0.7 policies/g05), RoboTwin 2.0 aloha-agilex embodiment.
+#   lerobot_infer infer --config policy.yaml   (PAOS Node entrypoint)
+# Checkpoint lerobot/g05_robotwin20: System1, flow action head, chunk 32; the first 8 steps
+# of each chunk are emitted. n_action_steps is fixed by the checkpoint post-processor and
+# must not be set here.
+
+# 14-dim qpos, 6 joints + gripper (joint7) per arm. Names must match the
+# robotwin_benchmark proprio_state names exactly (looked up by name).
+joints:
+  - {name: fl_joint1, mode: position}
+  - {name: fl_joint2, mode: position}
+  - {name: fl_joint3, mode: position}
+  - {name: fl_joint4, mode: position}
+  - {name: fl_joint5, mode: position}
+  - {name: fl_joint6, mode: position}
+  - {name: fl_joint7, mode: position}
+  - {name: fr_joint1, mode: position}
+  - {name: fr_joint2, mode: position}
+  - {name: fr_joint3, mode: position}
+  - {name: fr_joint4, mode: position}
+  - {name: fr_joint5, mode: position}
+  - {name: fr_joint6, mode: position}
+  - {name: fr_joint7, mode: position}
+
+policy:
+  type: g05
+  policy_id: g05_robotwin
+  auto_start: false
+  instruction: ""          # set per episode by set_instruction
+  device: cuda
+  runtime_system: system1
+  # weights.yaml g05-robotwin20-1006; the start hook verifies or downloads it here.
+  pretrained_path: ~/.PhyAgentOS/weights/robotwin-benchmark/g05_robotwin20
+
+image_inputs:
+  # Dora input id -> checkpoint image feature without the observation.images. prefix
+  image/head:        head_camera
+  image/left_wrist:  left_camera
+  image/right_wrist: right_camera

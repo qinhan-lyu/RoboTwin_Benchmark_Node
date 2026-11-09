@@ -1,0 +1,23 @@
+# Weights this Skill can evaluate. One entry per weight; never overwrite an entry,
+# add a new one (new weight_id, new profile) for every new training run.
+#
+# path      relative to the weight cache dir ~/.PhyAgentOS/weights/robotwin-benchmark/
+#           (the cache dir itself can be moved with weights_dir in ~/.PhyAgentOS/benchmarks.yaml)
+# lock      relative to this Skill; per-file size + sha256, checked by start.sh
+# source    where start.sh downloads missing files from; kind: none for private weights
+- weight_id: g05-robotwin20-1006
+  profile: vla-g05-1006
+  family: g05
+  paradigm: vla
+  benchmark: robotwin
+  embodiment: aloha-agilex
+  path: g05_robotwin20
+  lock: locks/g05_robotwin20_1006.lock.json
+  source:
+    kind: huggingface
+    repo_id: lerobot/g05_robotwin20
+    revision: b3b9695ce1f6dd08b4fb96486597fd2eb5c63ab0
+  trained_on: "RoboTwin 2.0, aloha-agilex, System1 flow action head, chunk 32"
+  date: 2026-10-06
+  released: true
+  notes: "Official LeRobot G0.5 checkpoint; norm stats ship inside the checkpoint processors."

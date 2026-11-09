@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "resource_id": "g05-robotwin20-1006",
+  "repo_id": "lerobot/g05_robotwin20",
+  "repo_type": "model",
+  "revision": "b3b9695ce1f6dd08b4fb96486597fd2eb5c63ab0",
+  "base_url": "https://huggingface.co",
+  "files": [
+    {
+      "path": "LICENSE",
+      "size_bytes": 13103,
+      "sha256": "7307545b304365232fb3aa65f020b44202d0ba162bb5ebb1f04eca4d1b840696"
+    },
+    {
+      "path": "NOTICE",
+      "size_bytes": 494,
+      "sha256": "df0ee127bed834e9e7a01e584b71ee96efc7460bd44735f50560ac042d67adce"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 1123,
+      "sha256": "18482dd8276152c557039bf99c5dd667699c2000ee2f364cca2c8cdebe804780"
+    },
+    {
+      "path": "action_tokenizer.safetensors",
+      "size_bytes": 169647468,
+      "sha256": "e0d7f3e39cfe112c8798a465c093f5d0d8f78a63b90feb6adac8f8658d9cb5af"
+    },
+    {
+      "path": "config.json",
+      "size_bytes": 21203,
+      "sha256": "94038d1d17740025a786eed1e54d564f341235ebde9cf212453a951172a8ab18"
+    },
+    {
+      "path": "hf_processor/config.json",
+      "size_bytes": 2908,
+      "sha256": "ed1c1723241f23f7f4e23430759cbd7dcfb4103cbdfe052bfe7626b57c2615b4"
+    },
+    {
+      "path": "hf_processor/configuration.json",
+      "size_bytes": 51,
+      "sha256": "2d4464e2ead06bc9bc718c781309ad1e7baded626d66e8dcdc8b469ba185faf0"
+    },
+    {
+      "path": "hf_processor/preprocessor_config.json",
+      "size_bytes": 390,
+      "sha256": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516"
+    },
+    {
+      "path": "hf_processor/tokenizer.json",
+      "size_bytes": 12807196,
+      "sha256": "fe000e3ed39ed12b8d2481d527d44f93c65d37e87645d2dcc80d1bf9d50d2927"
+    },
+    {
+      "path": "hf_processor/tokenizer_config.json",
+      "size_bytes": 16712,
+      "sha256": "e611fbccc7c29ef3b1cafb1cb7ea548d189968632901d678fd62be68c47885de"
+    },
+    {
+      "path": "hf_processor/video_preprocessor_config.json",
+      "size_bytes": 386,
+      "sha256": "d039cd7d88b3502a99edd455496b75b44ecf7dd3b3669748bafac37e6cecc085"
+    },
+    {
+      "path": "model.safetensors",
+      "size_bytes": 11440107112,
+      "sha256": "aac78dce285579b3798e35e84810505c701e836b30ff7f4c758bb8b4ef01f316"
+    },
+    {
+      "path": "policy_postprocessor.json",
+      "size_bytes": 1026,
+      "sha256": "cb67ad465a49a33ea13f54a5d11f2a87ed644e4a6826bca305a5af3d59cd36fa"
+    },
+    {
+      "path": "policy_postprocessor_step_0_unnormalizer_processor.safetensors",
+      "size_bytes": 5592,
+      "sha256": "f62d1efd1d1567ff71f3f09d75368654ee4b11e51c5e95c3a93e687fcf2fc117"
+    },
+    {
+      "path": "policy_preprocessor.json",
+      "size_bytes": 4532,
+      "sha256": "959403cee01eb69f3914d42d5a3636873118574126ddbf351517593158924e4f"
+    },
+    {
+      "path": "policy_preprocessor_step_5_normalizer_processor.safetensors",
+      "size_bytes": 5592,
+      "sha256": "f62d1efd1d1567ff71f3f09d75368654ee4b11e51c5e95c3a93e687fcf2fc117"
+    }
+  ]
+}
