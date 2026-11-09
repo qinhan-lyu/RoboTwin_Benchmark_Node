@@ -7,7 +7,7 @@ Gateway: http://127.0.0.1:19132. Tools: `robotwin.benchmark.describe`, `robotwin
 
 | Profile | Paradigm | Policy | Weight | Nodes |
 | --- | --- | --- | --- | --- |
-| `vla-g05-1006` | VLA | G05 (lerobot 0.7, System1) | `g05-robotwin20-1006` | gateway 1.1.0, robotwin_benchmark 1.2.0, lerobot_infer 1.1.0 |
+| `vla-g05-1006` | VLA | G05 (lerobot 0.7, System1) | `g05-robotwin20-1006` | gateway 1.1.0, robotwin_benchmark 1.2.0, lerobot_infer 1.1.1 |
 
 Profile names are `<paradigm>-<policy>-<weight date MMDD>`. `weights.yaml` lists each profile's
 weight; `locks/` pins the exact files (size and sha256).

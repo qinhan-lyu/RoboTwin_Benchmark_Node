@@ -47,10 +47,10 @@ artifacts:
       entrypoint: robotwin_benchmark
       sha256: 6d1bb3f80ed6f298545b5c5f460282422c097338880fb4f087d484e37f031469
     lerobot_infer:
-      artifact_id: lerobot_infer-1.1.0-linux-x86_64
-      version: 1.1.0
+      artifact_id: lerobot_infer-1.1.1-linux-x86_64
+      version: 1.1.1
       platform: linux
       arch: x86_64
       artifact_type: directory_tar_gz
       entrypoint: lerobot_infer
-      sha256: 977e0083e908220497c84c8d55fc6413f1e787fcbd13069531ddee16f5d35cd3
+      sha256: e91d80b276d0b206043476a847afbf7d19f0144eb844727bb23447fd56a48170
