@@ -53,4 +53,4 @@ artifacts:
       arch: x86_64
       artifact_type: directory_tar_gz
       entrypoint: lerobot_infer
-      sha256: 30cd666a79e60218bdeeca9d9480ad018008b4d9b1518c5bf52ee2d6e7005d2d
+      sha256: 977e0083e908220497c84c8d55fc6413f1e787fcbd13069531ddee16f5d35cd3
