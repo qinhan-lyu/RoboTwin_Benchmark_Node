@@ -11,26 +11,6 @@
       "sha256": "eccd6697b3ee48b06e10aa4cd361a7cc8112736b7c4cab265cbede62d4d4face"
     },
     {
-      "path": "profiles/g05_external/benchmark.yaml",
-      "size": 332,
-      "sha256": "8b16dc3346f80bc6e8339a6bf6e16fedfbe5b31f05b78d255fe8401e1927f034"
-    },
-    {
-      "path": "profiles/g05_external/dataflow.yaml",
-      "size": 2073,
-      "sha256": "2496a7d74759b18e3e08251a3ea7f57259998259f82d1a905b32a5dcb066e28d"
-    },
-    {
-      "path": "profiles/g05_external/gateway.yaml",
-      "size": 4085,
-      "sha256": "2b9a3aba26e0f6d4e9c14ae8080f8d8f47f07911994e2f780f28e5aa9e7e7e47"
-    },
-    {
-      "path": "profiles/g05_external/policy.yaml",
-      "size": 101,
-      "sha256": "c44d758565b949607b40e398d9077ce11ea689b8797b2685b9c14e829277baca"
-    },
-    {
       "path": "profiles/vla-g05-1006/benchmark.yaml",
       "size": 452,
       "sha256": "bbcfa85acca39b9e29f7bd57cb090ed8bed1e3e934052f82a38af2ebb7432f1d"
@@ -54,11 +34,6 @@
       "path": "README.md",
       "size": 1548,
       "sha256": "24235d3b32f6f70536ed9aa0bf05e6974208b3d4845a2899088411db2de52b06"
-    },
-    {
-      "path": "scripts/preflight.py",
-      "size": 3031,
-      "sha256": "5d3c81bb019a3b8748dddaab0fb263c00a27d2824118628abd379600a76c21a3"
     },
     {
       "path": "scripts/prepare.py",
