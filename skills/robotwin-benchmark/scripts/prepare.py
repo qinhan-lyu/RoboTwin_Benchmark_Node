@@ -12,12 +12,16 @@ All user settings live in one optional file shared by every benchmark Skill,
 
 The profile files only use the fixed paths below. This hook links them to the
 configured places, verifies the weights against their lock and downloads what
-is missing. Standard library + PyYAML, Python 3.8+.
+is missing. It then builds the private Python environment of the uv-based
+Nodes (`<node> --prepare`) so a first start on a clean machine downloads its
+packages here, before PAOS starts the startup_timeout_s clock.
+Standard library + PyYAML, Python 3.8+.
 """
 import argparse
 import hashlib
 import json
 import os
+import subprocess
 import sys
 import time
 import urllib.error
@@ -31,6 +35,8 @@ SECTION = "robotwin"
 DATA_LINK = PAOS_HOME / "data" / "robotwin"
 WEIGHTS_LINK = PAOS_HOME / "weights" / "robotwin-benchmark"
 STAMPS = PAOS_HOME / "cache" / "weights-verified"
+# Nodes whose launcher builds a uv environment on first start (`--prepare` = build only).
+PREPARE_NODES = ("robotwin_benchmark",)
 CONFIG_KEYS = {"root", "weights_dir", "hf_endpoint", "weights"}
 ROOT_REQUIRED = (
     "envs",
@@ -242,6 +248,21 @@ def prepare_weights(cfg, skill_root, entry):
     log("weights " + weight_id + ": verified, " + str(target.resolve()))
 
 
+def prepare_nodes(skill_name, profile):
+    """Build Node environments now; PAOS links the profile bin dir before this hook."""
+    bin_dir = PAOS_HOME / "forge_runtime" / "environments" / skill_name / profile / "current" / "bin"
+    for node in PREPARE_NODES:
+        launcher = bin_dir / node
+        if not launcher.exists():
+            log("skip %s environment prepare: %s not found" % (node, launcher))
+            continue
+        log("preparing %s environment (first start downloads ~6 GB)" % node)
+        started = time.time()
+        if subprocess.call([str(launcher), "--prepare"]) != 0:
+            raise Fail("%s --prepare failed" % node)
+        log("%s environment ready (%.0fs)" % (node, time.time() - started))
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--skill-root", type=Path, required=True)
@@ -253,6 +274,7 @@ def main():
         entry = find_weight(args.skill_root.resolve(), args.profile)
         if entry is not None:
             prepare_weights(cfg, args.skill_root.resolve(), entry)
+        prepare_nodes(os.environ.get("PAOS_SKILL_NAME", "robotwin-benchmark"), args.profile)
     except Fail as error:
         log("ERROR: " + str(error))
         return 1

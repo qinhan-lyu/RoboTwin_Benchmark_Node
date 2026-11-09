@@ -32,13 +32,13 @@
     },
     {
       "path": "README.md",
-      "size": 1548,
-      "sha256": "2df3daf50edeb71eee97bcd50ee252bd0766676f9a61cf52c14ad8fd01218b61"
+      "size": 1891,
+      "sha256": "ba40f5e4db9ce2b7fc34d362a3634187ac31792c5f51ff809f8b4bc2e6cd870b"
     },
     {
       "path": "scripts/prepare.py",
-      "size": 10445,
-      "sha256": "b76225e79d44e5c54546c9e848cde46c880b39f2ed5bb78c7c78dd8ae13c8e04"
+      "size": 11619,
+      "sha256": "c0b9a58e43013e4b32222b7c46c136502ddd233c8b0ad5fd13c99ee1eea50571"
     },
     {
       "path": "SKILL.md",

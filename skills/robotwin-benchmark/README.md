@@ -30,4 +30,8 @@ Then `paos skill start robotwin-benchmark --profile vla-g05-1006`.
 The start hook (`start.sh` -> `scripts/prepare.py`) links the RoboTwin root to
 `~/.PhyAgentOS/data/robotwin`, then verifies the profile weight against its lock and downloads
 missing files (HTTPS, resumable, no token). Each Node launcher builds its own uv environment from
-its lock on first start. See HOST_RUNTIME.md for the RoboTwin sources and assets.
+its lock on first start. For `robotwin_benchmark` (~6 GB of packages) the hook does this
+itself with `robotwin_benchmark --prepare`, because PAOS starts the `startup_timeout_s` (900 s)
+clock only after the hook, and a cold download on a clean machine takes longer than that.
+Later starts reuse `~/.PhyAgentOS/cache/nodes/robotwin_benchmark/<lock digest>` and skip it.
+See HOST_RUNTIME.md for the RoboTwin sources and assets.
