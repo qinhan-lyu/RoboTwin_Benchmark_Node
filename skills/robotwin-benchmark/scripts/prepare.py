@@ -12,9 +12,9 @@ All user settings live in one optional file shared by every benchmark Skill,
 
 The profile files only use the fixed paths below. This hook links them to the
 configured places, verifies the weights against their lock and downloads what
-is missing. It then builds the private Python environment of the uv-based
-Nodes (`<node> --prepare`) so a first start on a clean machine downloads its
-packages here, before PAOS starts the startup_timeout_s clock.
+is missing. It then runs `<node> --prepare` on the uv-based Nodes: the Node
+ships its prebuilt environment (robotwin_benchmark >= 1.2.2), so this only
+verifies it against the lock before PAOS starts the startup_timeout_s clock.
 Standard library + PyYAML, Python 3.8+.
 """
 import argparse
@@ -35,7 +35,7 @@ SECTION = "robotwin"
 DATA_LINK = PAOS_HOME / "data" / "robotwin"
 WEIGHTS_LINK = PAOS_HOME / "weights" / "robotwin-benchmark"
 STAMPS = PAOS_HOME / "cache" / "weights-verified"
-# Nodes whose launcher builds a uv environment on first start (`--prepare` = build only).
+# uv-based Nodes; `--prepare` verifies the bundled environment (builds it for unbundled Nodes).
 PREPARE_NODES = ("robotwin_benchmark",)
 CONFIG_KEYS = {"root", "weights_dir", "hf_endpoint", "weights"}
 ROOT_REQUIRED = (
@@ -249,14 +249,14 @@ def prepare_weights(cfg, skill_root, entry):
 
 
 def prepare_nodes(skill_name, profile):
-    """Build Node environments now; PAOS links the profile bin dir before this hook."""
+    """Verify Node environments now; PAOS links the profile bin dir before this hook."""
     bin_dir = PAOS_HOME / "forge_runtime" / "environments" / skill_name / profile / "current" / "bin"
     for node in PREPARE_NODES:
         launcher = bin_dir / node
         if not launcher.exists():
             log("skip %s environment prepare: %s not found" % (node, launcher))
             continue
-        log("preparing %s environment (first start downloads ~6 GB)" % node)
+        log("checking %s environment (bundled in the Node, no download)" % node)
         started = time.time()
         if subprocess.call([str(launcher), "--prepare"]) != 0:
             raise Fail("%s --prepare failed" % node)

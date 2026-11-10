@@ -13,16 +13,21 @@ does not use a host Python or a shared venv.
 
 `scripts/build_node_bundles.py` assembles this directory, `nodes/common/launcher.sh` and
 `verify.py`, the uv binary and the Node source into
-`dist/nodes/robotwin_benchmark-<ver>-linux-x86_64.tar.gz`.
+`dist/nodes/robotwin_benchmark-<ver>-linux-x86_64.tar.gz`. With `--bundle-env` (all releases
+since 1.2.2) it also builds the environment from `uv.lock` into `runtime/env/{python,venv}`
+(about 7.8 GB unpacked, 3.9 GB in the archive). The env is patched, verified and made
+relocatable (relative symlinks, no `home` in `pyvenv.cfg`) at packaging time.
 
 ## First start
 
 ```
-robotwin_benchmark --prepare   # build + patch + verify the private env, then exit
+robotwin_benchmark --prepare   # verify the env (bundled) or build + patch + verify it, then exit
 ```
 
-The env lives in `~/.PhyAgentOS/cache/nodes/robotwin_benchmark/<digest>/venv`. Here `<digest>`
-is derived from `uv.lock` + `patch_site.py`. The first start downloads about 5 GB.
+Bundled Node: the launcher uses `runtime/env` in place and downloads nothing.
+Unbundled Node (dev builds without `--bundle-env`): the env is built in
+`~/.PhyAgentOS/cache/nodes/robotwin_benchmark/<digest>/venv`. Here `<digest>` is derived from
+`uv.lock` + `patch_site.py`. That first start downloads about 5 GB.
 
 ## curobo wheel
 
