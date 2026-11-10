@@ -390,3 +390,14 @@ def test_config_rejects_bad_instruction_type(tmp_path: Path) -> None:
     except ValueError:
         return
     raise AssertionError("instruction_type 非法值必须被拒")
+
+
+def test_action_dim_reaches_capabilities() -> None:
+    """ee 模式 16 维；qpos 模式 = 关节名个数（aloha-agilex 14）。describe 原样带出。"""
+    from _core.adapter import expected_action_dim
+
+    ee = _bare_adapter(control_mode="ee")
+    assert expected_action_dim(ee) == 16
+    qpos = _bare_adapter(control_mode="qpos")
+    qpos._joint_names = [f"j{i}" for i in range(14)]
+    assert expected_action_dim(qpos) == 14
