@@ -1,4 +1,4 @@
-# robotwin-benchmark 0.2.0 candidate
+# robotwin-benchmark 0.2.1 candidate
 
 Not accepted for publication until the real-model and PAOS lifecycle tests pass.
 
@@ -7,7 +7,7 @@ Gateway: http://127.0.0.1:19132. Tools: `robotwin.benchmark.describe`, `robotwin
 
 | Profile | Paradigm | Policy | Weight | Nodes |
 | --- | --- | --- | --- | --- |
-| `vla-g05-1006` | VLA | G05 (lerobot 0.7, System1) | `g05-robotwin20-1006` | gateway 1.1.0, robotwin_benchmark 1.2.0, lerobot_infer 1.1.1 |
+| `vla-g05-1006` | VLA | G05 (lerobot 0.7, System1) | `g05-robotwin20-1006` | gateway 1.1.0, robotwin_benchmark 1.2.1, lerobot_infer 1.1.1 |
 
 Profile names are `<paradigm>-<policy>-<weight date MMDD>`. `weights.yaml` lists each profile's
 weight; `locks/` pins the exact files (size and sha256).
@@ -35,3 +35,5 @@ itself with `robotwin_benchmark --prepare`, because PAOS starts the `startup_tim
 clock only after the hook, and a cold download on a clean machine takes longer than that.
 Later starts reuse `~/.PhyAgentOS/cache/nodes/robotwin_benchmark/<lock digest>` and skip it.
 See HOST_RUNTIME.md for the RoboTwin sources and assets.
+
+0.2.1: robotwin_benchmark 1.2.1 checks every policy action against the environment action space (14D for qpos on aloha-agilex, 16D for ee) before `env.step`. A mismatch fails the whole run with `action_dim_mismatch` instead of scoring each episode as 0. `describe` now reports `action_dim`.
