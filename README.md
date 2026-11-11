@@ -1,4 +1,4 @@
-> **PAOS Ubuntu 20.04 integration (2026-09-17):** See [current release scope and build instructions](docs/PAOS_UBUNTU20.md) and [Skill sources](skills/robotwin-benchmark/SKILL.md). Historical evaluation statements below belong to the upstream student snapshot; they are not new acceptance evidence for this release.
+> **PAOS Ubuntu 20.04 integration (2026-09-17):** See [current release scope and build instructions](docs/PAOS_UBUNTU20.md). Historical evaluation statements below belong to the upstream student snapshot; they are not new acceptance evidence for this release.
 
 # RoboTwin Benchmark 节点
 
