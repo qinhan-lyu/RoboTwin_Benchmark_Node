@@ -2,42 +2,11 @@
 #
 # 用法（在仓库根目录）：
 #   cp config.example.yaml config.yaml    # 按需改批次/口径（预设见 README §3）
-#   export PATH=$DORA_BIN:$PATH            # 两个节点 path 换成本机 $BENCH_PY（README §9）
+#   export PATH=$DORA_BIN:$PATH            # 填好下面两个节点的 path（README §10）
+#
+# policy 节点是独立仓库的通用节点（如 lerobot_infer），换 id 时同步改 benchmark
+# 节点的 inputs.action 为 <新id>/action。
 #   dora run dataflow.example.yaml
-#
-# policy 节点三套实测接线（替换下面的 policy 节点；换 id 时同步改 benchmark
-# 节点的 inputs.action 为 <新id>/action）：
-#
-# ① stub 冒烟（无策略权重，验时序；benchmark 配置 task_ids "0-1"、
-#    init_state_ids "0"、num_runs 1）：
-#   - id: policy
-#     path: <BENCH_PY>
-#     args: -u stub_policy.py
-#     inputs/outputs 与下面相同
-#
-# ② 真策略 X_VLA（ee 口径出真分；benchmark 配置 control_mode: ee + checkpoint
-#    声明，见 README §2.2）：
-#   - id: real_policy
-#     path: <BENCH_PY>
-#     args: -X faulthandler -u real_policy.py
-#     env:
-#       REAL_POLICY_CONFIG: ./policy_real.yaml   # 内容见 README §3.2
-#       CUDA_VISIBLE_DEVICES: "1"                # benchmark 放另一张 GPU
-#     inputs/outputs 与下面相同
-#
-# ③ 判据 A 验收：同 ②，benchmark 配置 task_ids "0-1"、init_state_ids "0-49"、
-#    control_mode: ee；两节点拆到两张 GPU（README §3.4）
-#
-# ④ G05 判据 A 复验（qpos 口径；政策经 websocket 连远端 G05 policy server，
-#    policy 节点本机不占 GPU，推理在 server 的 GPU 上，见 README §3.5）：
-#   - id: real_policy
-#     path: <BENCH_PY>
-#     args: -X faulthandler -u real_policy.py
-#     env:
-#       REAL_POLICY_CONFIG: ./policy_g05.yaml   # 内容见 README §3.5
-#       CUDA_VISIBLE_DEVICES: ""                # 本节点不加载模型，无需 GPU
-#     inputs/outputs 与下面相同
-#   benchmark 配置：task_ids "0-1"、init_state_ids "0-49"、control_mode qpos
 #
 # 该示例默认是 autorun（config 中 serve 缺省/为 false）。启用 Tool serve 时：
 # 1. 在 config.yaml 设置 serve: true；

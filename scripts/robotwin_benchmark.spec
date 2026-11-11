@@ -31,9 +31,9 @@ from PyInstaller.utils.hooks import (
 
 _node_root = Path(os.environ["ROBOTWIN_NODE_ROOT"]).resolve()
 _kind = os.environ.get("ROBOTWIN_NODE_KIND", "benchmark")
-if _kind not in ("benchmark", "policy"):
+if _kind != "benchmark":
     raise ValueError(f"Invalid node kind: {_kind}")
-_entry = _node_root / "scripts" / ("policy_entrypoint.py" if _kind == "policy" else "entrypoint.py")
+_entry = _node_root / "scripts" / "entrypoint.py"
 _hooks = _node_root / "scripts" / "hooks"
 
 

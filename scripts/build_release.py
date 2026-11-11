@@ -28,7 +28,7 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--version', required=True)
     parser.add_argument('--numpy', default='1.26.4')
-    parser.add_argument('--kind', choices=('all','benchmark','policy'), default='all')
+    parser.add_argument('--kind', choices=('benchmark',), default='benchmark')
     parser.add_argument('--index-url', default='https://pypi.tuna.tsinghua.edu.cn/simple')
     args=parser.parse_args()
     if sys.version_info[:2] != (3,12) or platform.machine() != 'x86_64':
@@ -60,7 +60,7 @@ def main():
         path=root/relative
         if relative and path.is_file() and not relative.startswith(('build/','dist/')):
             source_hashes[relative]=hashlib.sha256(path.read_bytes()).hexdigest()
-    for kind in (('benchmark','policy') if args.kind=='all' else (args.kind,)):
+    for kind in (args.kind,):
         name=f'{benchmark}_{kind}'
         env=os.environ.copy()
         env[f'{benchmark.upper()}_NODE_ROOT']=str(root)

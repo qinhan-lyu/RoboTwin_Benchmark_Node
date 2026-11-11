@@ -10,7 +10,7 @@
 #   判据 A 验收：task_ids "0-1"、init_state_ids "0-49"、control_mode ee
 #              + checkpoint 声明（与官方 runner 同口径批次）
 #   G05 判据 A 复验：task_ids "0-1"、init_state_ids "0-49"、control_mode qpos
-#              + checkpoint 声明（官方侧同 checkpoint 同 episodes，README §3.5）
+#              + checkpoint 声明（官方侧同 checkpoint 同 episodes，README §3.2）
 #
 # 另一个模板是 dataflow.example.yaml（dora 拓扑，policy 节点接线见其头注释）。
 
