@@ -22,3 +22,6 @@ build/
 # 编辑器 / 系统
 .DS_Store
 *.swp
+
+# curobo wheel (77.8MB, build per nodes/robotwin_benchmark/README.md)
+nodes/robotwin_benchmark/wheels/*.whl
