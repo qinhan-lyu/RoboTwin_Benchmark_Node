@@ -33,7 +33,7 @@ import tempfile
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-VERSION = "1.2.0"
+VERSION = "1.2.1"
 NODE = "robotwin_benchmark"
 ENTRY = "main.py"
 CORE_IMPORTS = ("numpy torch sapien mplib toppra open3d scipy transforms3d trimesh cv2 "
