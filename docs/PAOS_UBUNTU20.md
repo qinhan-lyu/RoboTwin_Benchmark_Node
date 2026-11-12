@@ -12,20 +12,27 @@ Both frozen Nodes were built on Ubuntu 20.04 x86_64 with Python 3.12. Their scan
 
 ## Runtime and sources
 
-Read [HOST_RUNTIME.md](../skills/robotwin-benchmark/HOST_RUNTIME.md), [SKILL.md](../skills/robotwin-benchmark/SKILL.md) and [skill.yaml](../skills/robotwin-benchmark/skill.yaml). These are thin Nodes; model and simulator assets are external. The complete reviewed Skill source is tracked, including its dataflow and immutable Node locks.
+This repository holds the `robotwin_benchmark` Node only. The `robotwin-benchmark` Skill
+(profiles, Node locks, start hook) and the G05 policy code were moved out on 2026-11-11 and
+are versioned and packaged separately. The Node owns its runtime under
+`nodes/robotwin_benchmark/`, see [its README](../nodes/robotwin_benchmark/README.md).
+Model and simulator assets are external.
 
-The student's original repository history is retained. Benchmark and policy were independently built from the source hashes in their receipts before this publication commit. Adding Skill source and release documentation did not rebuild the frozen Node bytes. The Python project's package version and the two independently versioned binary artifacts are separate identifiers.
+The student's original repository history is retained. The Python project's package version
+and the independently versioned binary artifact are separate identifiers.
 
 ## Rebuild commands
 
-On Ubuntu 20.04, with uv and Python 3.12:
+Current Node releases (1.2.2 and later) bundle the prebuilt env. On Ubuntu 20.04 x86_64 with
+uv, Python >= 3.9 for the build script, and a visible CUDA GPU for env verification:
 
 ```bash
-python3.12 scripts/build_release.py --kind benchmark --version 1.1.4
-python3.12 scripts/build_release.py --kind policy --version 1.1.1
-python3.12 scripts/package_skill.py skills/robotwin-benchmark --output-dir dist
+python3 scripts/build_node_bundles.py --curobo-wheel <nvidia_curobo-0.7.8 whl> \
+    --bundle-env --out dist/nodes
 ```
 
-The Skill packager verifies every source file against archive-manifest.json before packaging and produces the reviewed archive byte-for-byte. If changing a Skill, update its version/locks/member manifest and validate the changed bundle before publication. A fresh Node build needs new digest verification and relevant runtime acceptance; binary reproducibility is not assumed.
+The 2026-09-17 candidate (`robotwin_benchmark` 1.1.4) was built with
+`scripts/build_release.py --kind benchmark --version 1.1.4`. A fresh Node build needs new
+digest verification and relevant runtime acceptance; binary reproducibility is not assumed.
 
 Hashes, sizes, build source hashes and dependency receipts are in [the publication manifest](../releases/paos-ubuntu20-20260917.json). No model weights or simulator datasets are redistributed here.
